@@ -1,0 +1,11 @@
+
+PODS: 
+- BCStatusItem (0.0.1)
+
+COCOAPODS: 0.16.4
+
+SPEC CHECKSUMS: 
+  BCStatusItem: 1f0839566d8b82a49ebbd5106e1a26d39ca31abf
+
+DEPENDENCIES: 
+- BCStatusItem

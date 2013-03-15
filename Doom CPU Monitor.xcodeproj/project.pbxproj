@@ -19,10 +19,11 @@
 		5E22934116F2A63100F1AEF8 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5E22933F16F2A63100F1AEF8 /* Credits.rtf */; };
 		5E22934416F2A63100F1AEF8 /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E22934316F2A63100F1AEF8 /* AFAppDelegate.m */; };
 		5E22934716F2A63100F1AEF8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E22934516F2A63100F1AEF8 /* MainMenu.xib */; };
-		5E22935216F2AA7F00F1AEF8 /* AFStatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E22935116F2AA7F00F1AEF8 /* AFStatusItemView.m */; };
+		8FC57F1993094595825D1007 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C53C735C1C0418CA38F3B92 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C53C735C1C0418CA38F3B92 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E0C28F716F396080093BE5F /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		5E0C28F816F396080093BE5F /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		5E0C28F916F396080093BE5F /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
@@ -42,8 +43,7 @@
 		5E22934216F2A63100F1AEF8 /* AFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFAppDelegate.h; sourceTree = "<group>"; };
 		5E22934316F2A63100F1AEF8 /* AFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFAppDelegate.m; sourceTree = "<group>"; };
 		5E22934616F2A63100F1AEF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		5E22935016F2AA7F00F1AEF8 /* AFStatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFStatusItemView.h; path = ../AFStatusItemView.h; sourceTree = "<group>"; };
-		5E22935116F2AA7F00F1AEF8 /* AFStatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFStatusItemView.m; path = ../AFStatusItemView.m; sourceTree = "<group>"; };
+		E837B21DEB0A40DB9F384C03 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +52,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E22933116F2A63100F1AEF8 /* Cocoa.framework in Frameworks */,
+				8FC57F1993094595825D1007 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +78,7 @@
 				5E22933616F2A63100F1AEF8 /* Doom CPU Monitor */,
 				5E22932F16F2A63100F1AEF8 /* Frameworks */,
 				5E22932E16F2A63100F1AEF8 /* Products */,
+				E837B21DEB0A40DB9F384C03 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +95,7 @@
 			children = (
 				5E22933016F2A63100F1AEF8 /* Cocoa.framework */,
 				5E22933216F2A63100F1AEF8 /* Other Frameworks */,
+				3C53C735C1C0418CA38F3B92 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -113,8 +116,6 @@
 				5E0C28F616F395FD0093BE5F /* Images */,
 				5E22934216F2A63100F1AEF8 /* AFAppDelegate.h */,
 				5E22934316F2A63100F1AEF8 /* AFAppDelegate.m */,
-				5E22935016F2AA7F00F1AEF8 /* AFStatusItemView.h */,
-				5E22935116F2AA7F00F1AEF8 /* AFStatusItemView.m */,
 				5E22934516F2A63100F1AEF8 /* MainMenu.xib */,
 				5E22933716F2A63100F1AEF8 /* Supporting Files */,
 			);
@@ -143,6 +144,7 @@
 				5E22932916F2A63100F1AEF8 /* Sources */,
 				5E22932A16F2A63100F1AEF8 /* Frameworks */,
 				5E22932B16F2A63100F1AEF8 /* Resources */,
+				F782CC924BDF4AD1821D0069 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,6 +201,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F782CC924BDF4AD1821D0069 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5E22932916F2A63100F1AEF8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -206,7 +225,6 @@
 			files = (
 				5E22933D16F2A63100F1AEF8 /* main.m in Sources */,
 				5E22934416F2A63100F1AEF8 /* AFAppDelegate.m in Sources */,
-				5E22935216F2AA7F00F1AEF8 /* AFStatusItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +319,7 @@
 		};
 		5E22934B16F2A63100F1AEF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E837B21DEB0A40DB9F384C03 /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -314,6 +333,7 @@
 		};
 		5E22934C16F2A63100F1AEF8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E837B21DEB0A40DB9F384C03 /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

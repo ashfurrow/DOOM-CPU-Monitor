@@ -13,16 +13,15 @@
 #include <mach/mach_host.h>
 
 #import "AFAppDelegate.h"
-#import "AFStatusItemView.h"
 
 @interface AFAppDelegate ()
 
 @property (strong) NSTimer *updateTimer;
 @property (strong) NSLock *CPUUsageLock;
 
-@property (strong) AFStatusItemView *statusItemView;
-
 @end
+
+static const NSUInteger kMaxDangerLevel = 6;
 
 @implementation AFAppDelegate
 {
@@ -34,12 +33,12 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     
-    self.statusItemView = [[AFStatusItemView alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
-    
-    [self.statusItem setTitle:@" "];
-    [self.statusItem setView:self.statusItemView];
+	[self.statusItem setupView];
+    [self.statusItem setImage:[NSImage imageNamed:@"1"]];
+    [self.statusItem setAlternateImage:[NSImage imageNamed:@"1"]];
+    [self.statusItem setHighlightMode:YES];
     [self.statusItem setMenu:self.statusMenu];
     
     self.CPUUsageLock = [[NSLock alloc] init];
@@ -57,23 +56,30 @@
     [self updateInfo:nil];
 }
 
-#pragma mark - Public methpods
+#pragma mark - Private Methods
 
--(void)openMenu
+
+#pragma mark - Overridden Properties
+
+-(void)setDangerLevel:(NSUInteger)dangerLevel
 {
-    [self.statusItem popUpStatusItemMenu:self.statusMenu];
+    _dangerLevel = dangerLevel;
+    
+    NSImage *image = [NSImage imageNamed:[NSString stringWithFormat:@"%lu", self.dangerLevel]];
+    [self.statusItem setImage:image];
+    [self.statusItem setAlternateImage:image];
 }
 
 #pragma mark - NSMenuDelegate methods
 
 - (void)menuWillOpen:(NSMenu *)menu
 {
-    [self.statusItemView setIsSelected:YES];
+    NSLog(@"Will Open");
 }
 
 - (void)menuDidClose:(NSMenu *)menu
 {
-    [self.statusItemView setIsSelected:NO];
+    NSLog(@"Did Close");
 }
 
 #pragma mark - NSTimer methods
@@ -105,7 +111,7 @@
             CGFloat usage = inUse/total;
             if (highestValue < usage) highestValue = usage;
             
-            NSLog(@"Core: %u Usage: %f", i, usage);
+//            NSLog(@"Core: %u Usage: %f", i, usage);
         }
         [self.CPUUsageLock unlock];
         
@@ -124,9 +130,9 @@
         [NSApp terminate:nil];
     }
     
-    [self.statusItemView setDangerLevel:(highestValue * (kMaxDangerLevel - 1)) + 1];
+    [self setDangerLevel:(highestValue * (kMaxDangerLevel - 1)) + 1];
     
-    NSLog(@"Highest Core Usage: %f", highestValue);
+//    NSLog(@"Highest Core Usage: %f", highestValue);
     
 //    int mib[6];
 //    mib[0] = CTL_HW;

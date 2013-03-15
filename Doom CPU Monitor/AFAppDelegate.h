@@ -7,14 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <BCStatusItemView.h>
+#import <NSStatusItem+BCStatusItem.h>
 
 @interface AFAppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+@property (nonatomic, assign) NSUInteger dangerLevel;
 
 @property (strong) NSStatusItem *statusItem;
 @property (strong) IBOutlet NSMenu *statusMenu;
-
--(void)openMenu;
 
 @end
