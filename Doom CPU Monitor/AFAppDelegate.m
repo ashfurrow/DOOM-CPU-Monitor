@@ -14,10 +14,15 @@
 
 #import "AFAppDelegate.h"
 
+#define kDefaultFaceKey @"com.ashFurrow.DefaultFace"
+
 @interface AFAppDelegate ()
 
 @property (strong) NSTimer *updateTimer;
 @property (strong) NSLock *CPUUsageLock;
+
+@property (nonatomic, strong) NSDictionary *faceChoices;
+@property (nonatomic, strong) NSString *currentFace;
 
 @end
 
@@ -33,6 +38,21 @@ static const NSUInteger kMaxDangerLevel = 6;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+	[self setupMenu];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *defaultFace = [defaults valueForKey:kDefaultFaceKey];
+	if (defaultFace && [[self.faceChoices allKeys] containsObject:defaultFace])
+	{
+		self.currentFace = defaultFace;
+	}
+	else
+	{
+		self.currentFace = @"Doom";
+		[defaults setValue:self.currentFace forKey:kDefaultFaceKey];
+		[defaults synchronize];
+	}
+	
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     
 	[self.statusItem setupView];
@@ -57,7 +77,59 @@ static const NSUInteger kMaxDangerLevel = 6;
 }
 
 #pragma mark - Private Methods
+- (void)setupMenu
+{
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSURL *appSupport = [[fileManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil] URLByAppendingPathComponent:@"Doom CPU/Faces"];
 
+	//Create our dir if it doesnt exist
+	BOOL isDir;
+	if (![fileManager fileExistsAtPath:appSupport.path isDirectory:&isDir] || !isDir)
+	{
+		[fileManager createDirectoryAtURL:appSupport withIntermediateDirectories:YES attributes:nil error:nil];
+		[self createDoomItem];
+	}
+	
+	NSDirectoryEnumerator *dirEnumerator = [fileManager enumeratorAtURL:appSupport includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:NSDirectoryEnumerationSkipsSubdirectoryDescendants|NSDirectoryEnumerationSkipsHiddenFiles errorHandler:NULL];
+	
+	//We start at 2 to account for the about item and the seperator
+	NSInteger itemIndex = 2;
+	NSMutableDictionary *items = [NSMutableDictionary dictionary];
+	for (NSURL *faceURL in dirEnumerator)
+	{
+		// Retrieve the file name. From NSURLNameKey, cached during the enumeration.
+        NSString *fileName;
+        [faceURL getResourceValue:&fileName forKey:NSURLNameKey error:NULL];
+		
+		// Add the item
+		items[fileName] = faceURL.path;
+		
+		//Create Menu Item
+		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:fileName action:@selector(selectItem:) keyEquivalent:@""];
+		[self.statusMenu insertItem:item atIndex:itemIndex++];
+	}
+
+	self.faceChoices = items;
+}
+
+// This creates the Doom item in application support if it is not present
+- (void)createDoomItem
+{
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSURL *doomFace = [fileManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
+	doomFace = [doomFace URLByAppendingPathComponent:@"Doom CPU/Faces/Doom/"];
+	
+	if ([fileManager createDirectoryAtURL:doomFace withIntermediateDirectories:YES attributes:nil error:nil])
+	{		
+		NSBundle *bundle = [NSBundle mainBundle];
+		for (NSInteger i = 1 ; i <= 6; i++)
+		{
+			NSURL *face = [bundle URLForResource:[@(i) stringValue] withExtension:@"png" subdirectory:nil];
+			NSURL *newFace = [[doomFace URLByAppendingPathComponent:[@(i) stringValue]] URLByAppendingPathExtension:@"png"];
+			[fileManager copyItemAtURL:face toURL:newFace error:nil];
+		}
+	}
+}
 
 #pragma mark - Overridden Properties
 
@@ -65,12 +137,22 @@ static const NSUInteger kMaxDangerLevel = 6;
 {
     _dangerLevel = dangerLevel;
     
-    NSImage *image = [NSImage imageNamed:[NSString stringWithFormat:@"%lu", self.dangerLevel]];
+	NSString *facePath = [[self.faceChoices[self.currentFace] stringByAppendingPathComponent:[@(dangerLevel) stringValue]] stringByAppendingPathExtension:@"png"];
+    NSImage *image = [[NSImage alloc] initWithContentsOfFile:facePath];
     [self.statusItem setImage:image];
     [self.statusItem setAlternateImage:image];
 }
 
 #pragma mark - NSMenuDelegate methods
+- (void)selectItem:(NSMenuItem *)item
+{
+	self.currentFace = item.title;
+	[self setDangerLevel:_dangerLevel];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setValue:self.currentFace forKey:kDefaultFaceKey];
+	[defaults synchronize];
+}
 
 - (void)menuWillOpen:(NSMenu *)menu
 {
