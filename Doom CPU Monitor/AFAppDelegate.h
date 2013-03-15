@@ -8,12 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AFAppDelegate : NSObject <NSApplicationDelegate>
+@interface AFAppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 
 @property (strong) NSStatusItem *statusItem;
-@property (weak) IBOutlet NSMenu *statusMenu;
+@property (strong) IBOutlet NSMenu *statusMenu;
 
 -(void)openMenu;
 

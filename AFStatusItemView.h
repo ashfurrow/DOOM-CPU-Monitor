@@ -8,8 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+extern const NSUInteger kMaxDangerLevel;
+
 @interface AFStatusItemView : NSView
 
-@property (nonatomic, assign) CGFloat alpha;
+@property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, assign) NSUInteger dangerLevel;
 
 @end

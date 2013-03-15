@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E0C28FD16F396080093BE5F /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C28F716F396080093BE5F /* 1.png */; };
+		5E0C28FE16F396080093BE5F /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C28F816F396080093BE5F /* 2.png */; };
+		5E0C28FF16F396080093BE5F /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C28F916F396080093BE5F /* 3.png */; };
+		5E0C290016F396080093BE5F /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C28FA16F396080093BE5F /* 4.png */; };
+		5E0C290116F396080093BE5F /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C28FB16F396080093BE5F /* 5.png */; };
+		5E0C290216F396080093BE5F /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C28FC16F396080093BE5F /* 6.png */; };
 		5E22933116F2A63100F1AEF8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E22933016F2A63100F1AEF8 /* Cocoa.framework */; };
 		5E22933B16F2A63100F1AEF8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E22933916F2A63100F1AEF8 /* InfoPlist.strings */; };
 		5E22933D16F2A63100F1AEF8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E22933C16F2A63100F1AEF8 /* main.m */; };
@@ -17,6 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E0C28F716F396080093BE5F /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		5E0C28F816F396080093BE5F /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		5E0C28F916F396080093BE5F /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		5E0C28FA16F396080093BE5F /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		5E0C28FB16F396080093BE5F /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
+		5E0C28FC16F396080093BE5F /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
 		5E22932D16F2A63100F1AEF8 /* Doom CPU Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Doom CPU Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E22933016F2A63100F1AEF8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5E22933316F2A63100F1AEF8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -46,6 +58,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E0C28F616F395FD0093BE5F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				5E0C28F716F396080093BE5F /* 1.png */,
+				5E0C28F816F396080093BE5F /* 2.png */,
+				5E0C28F916F396080093BE5F /* 3.png */,
+				5E0C28FA16F396080093BE5F /* 4.png */,
+				5E0C28FB16F396080093BE5F /* 5.png */,
+				5E0C28FC16F396080093BE5F /* 6.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		5E22932416F2A63100F1AEF8 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +110,7 @@
 		5E22933616F2A63100F1AEF8 /* Doom CPU Monitor */ = {
 			isa = PBXGroup;
 			children = (
+				5E0C28F616F395FD0093BE5F /* Images */,
 				5E22934216F2A63100F1AEF8 /* AFAppDelegate.h */,
 				5E22934316F2A63100F1AEF8 /* AFAppDelegate.m */,
 				5E22935016F2AA7F00F1AEF8 /* AFStatusItemView.h */,
@@ -162,6 +188,12 @@
 				5E22933B16F2A63100F1AEF8 /* InfoPlist.strings in Resources */,
 				5E22934116F2A63100F1AEF8 /* Credits.rtf in Resources */,
 				5E22934716F2A63100F1AEF8 /* MainMenu.xib in Resources */,
+				5E0C28FD16F396080093BE5F /* 1.png in Resources */,
+				5E0C28FE16F396080093BE5F /* 2.png in Resources */,
+				5E0C28FF16F396080093BE5F /* 3.png in Resources */,
+				5E0C290016F396080093BE5F /* 4.png in Resources */,
+				5E0C290116F396080093BE5F /* 5.png in Resources */,
+				5E0C290216F396080093BE5F /* 6.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +306,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Doom CPU Monitor/Doom CPU Monitor-Prefix.pch";
 				INFOPLIST_FILE = "Doom CPU Monitor/Doom CPU Monitor-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -286,6 +319,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Doom CPU Monitor/Doom CPU Monitor-Prefix.pch";
 				INFOPLIST_FILE = "Doom CPU Monitor/Doom CPU Monitor-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -310,6 +344,7 @@
 				5E22934C16F2A63100F1AEF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,29 +8,48 @@
 
 #import "AFStatusItemView.h"
 
+const NSUInteger kMaxDangerLevel = 6;
+
 @implementation AFStatusItemView
 
--(void)setAlpha:(CGFloat)alpha
+-(void)setIsSelected:(BOOL)isSelected
 {
-    _alpha = alpha;
+    _isSelected = isSelected;
+    
+    [self setNeedsDisplay:YES];
+}
+
+-(void)setDangerLevel:(NSUInteger)dangerLevel
+{
+    _dangerLevel = dangerLevel;
     
     [self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [[NSColor colorWithCalibratedRed:1.0f green:0.0f blue:0.0f alpha:self.alpha] set];
-    NSRectFill(dirtyRect);
-}
-
--(void)mouseDown:(NSEvent *)theEvent
-{
+    NSRect rect = self.bounds;
     
+    rect.origin.x = 2;
+    rect.origin.y = 2;
+    rect.size.width = 17;
+    rect.size.height = 19;
+    
+    if ([self isSelected])
+    {
+        [[NSColor blueColor] set];
+        NSRectFill(self.bounds);
+    }
+    
+    [[NSImage imageNamed:[NSString stringWithFormat:@"%lu", self.dangerLevel]] drawInRect:rect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+
 }
 
 -(void)mouseUp:(NSEvent *)theEvent
 {
     [AppDelegate openMenu];
+    
+    [self setNeedsDisplay:YES];
 }
 
 @end
