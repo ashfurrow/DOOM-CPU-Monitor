@@ -1,0 +1,317 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E22933116F2A63100F1AEF8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E22933016F2A63100F1AEF8 /* Cocoa.framework */; };
+		5E22933B16F2A63100F1AEF8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E22933916F2A63100F1AEF8 /* InfoPlist.strings */; };
+		5E22933D16F2A63100F1AEF8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E22933C16F2A63100F1AEF8 /* main.m */; };
+		5E22934116F2A63100F1AEF8 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5E22933F16F2A63100F1AEF8 /* Credits.rtf */; };
+		5E22934416F2A63100F1AEF8 /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E22934316F2A63100F1AEF8 /* AFAppDelegate.m */; };
+		5E22934716F2A63100F1AEF8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E22934516F2A63100F1AEF8 /* MainMenu.xib */; };
+		5E22935216F2AA7F00F1AEF8 /* AFStatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E22935116F2AA7F00F1AEF8 /* AFStatusItemView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5E22932D16F2A63100F1AEF8 /* Doom CPU Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Doom CPU Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E22933016F2A63100F1AEF8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		5E22933316F2A63100F1AEF8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		5E22933416F2A63100F1AEF8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5E22933516F2A63100F1AEF8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5E22933816F2A63100F1AEF8 /* Doom CPU Monitor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Doom CPU Monitor-Info.plist"; sourceTree = "<group>"; };
+		5E22933A16F2A63100F1AEF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5E22933C16F2A63100F1AEF8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5E22933E16F2A63100F1AEF8 /* Doom CPU Monitor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Doom CPU Monitor-Prefix.pch"; sourceTree = "<group>"; };
+		5E22934016F2A63100F1AEF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5E22934216F2A63100F1AEF8 /* AFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFAppDelegate.h; sourceTree = "<group>"; };
+		5E22934316F2A63100F1AEF8 /* AFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFAppDelegate.m; sourceTree = "<group>"; };
+		5E22934616F2A63100F1AEF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5E22935016F2AA7F00F1AEF8 /* AFStatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFStatusItemView.h; path = ../AFStatusItemView.h; sourceTree = "<group>"; };
+		5E22935116F2AA7F00F1AEF8 /* AFStatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFStatusItemView.m; path = ../AFStatusItemView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E22932A16F2A63100F1AEF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E22933116F2A63100F1AEF8 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5E22932416F2A63100F1AEF8 = {
+			isa = PBXGroup;
+			children = (
+				5E22933616F2A63100F1AEF8 /* Doom CPU Monitor */,
+				5E22932F16F2A63100F1AEF8 /* Frameworks */,
+				5E22932E16F2A63100F1AEF8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5E22932E16F2A63100F1AEF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E22932D16F2A63100F1AEF8 /* Doom CPU Monitor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E22932F16F2A63100F1AEF8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E22933016F2A63100F1AEF8 /* Cocoa.framework */,
+				5E22933216F2A63100F1AEF8 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E22933216F2A63100F1AEF8 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E22933316F2A63100F1AEF8 /* AppKit.framework */,
+				5E22933416F2A63100F1AEF8 /* CoreData.framework */,
+				5E22933516F2A63100F1AEF8 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		5E22933616F2A63100F1AEF8 /* Doom CPU Monitor */ = {
+			isa = PBXGroup;
+			children = (
+				5E22934216F2A63100F1AEF8 /* AFAppDelegate.h */,
+				5E22934316F2A63100F1AEF8 /* AFAppDelegate.m */,
+				5E22935016F2AA7F00F1AEF8 /* AFStatusItemView.h */,
+				5E22935116F2AA7F00F1AEF8 /* AFStatusItemView.m */,
+				5E22934516F2A63100F1AEF8 /* MainMenu.xib */,
+				5E22933716F2A63100F1AEF8 /* Supporting Files */,
+			);
+			path = "Doom CPU Monitor";
+			sourceTree = "<group>";
+		};
+		5E22933716F2A63100F1AEF8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5E22933816F2A63100F1AEF8 /* Doom CPU Monitor-Info.plist */,
+				5E22933916F2A63100F1AEF8 /* InfoPlist.strings */,
+				5E22933C16F2A63100F1AEF8 /* main.m */,
+				5E22933E16F2A63100F1AEF8 /* Doom CPU Monitor-Prefix.pch */,
+				5E22933F16F2A63100F1AEF8 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5E22932C16F2A63100F1AEF8 /* Doom CPU Monitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E22934A16F2A63100F1AEF8 /* Build configuration list for PBXNativeTarget "Doom CPU Monitor" */;
+			buildPhases = (
+				5E22932916F2A63100F1AEF8 /* Sources */,
+				5E22932A16F2A63100F1AEF8 /* Frameworks */,
+				5E22932B16F2A63100F1AEF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Doom CPU Monitor";
+			productName = "Doom CPU Monitor";
+			productReference = 5E22932D16F2A63100F1AEF8 /* Doom CPU Monitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5E22932516F2A63100F1AEF8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AF;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Ash Furrow";
+			};
+			buildConfigurationList = 5E22932816F2A63100F1AEF8 /* Build configuration list for PBXProject "Doom CPU Monitor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5E22932416F2A63100F1AEF8;
+			productRefGroup = 5E22932E16F2A63100F1AEF8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E22932C16F2A63100F1AEF8 /* Doom CPU Monitor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5E22932B16F2A63100F1AEF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E22933B16F2A63100F1AEF8 /* InfoPlist.strings in Resources */,
+				5E22934116F2A63100F1AEF8 /* Credits.rtf in Resources */,
+				5E22934716F2A63100F1AEF8 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E22932916F2A63100F1AEF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E22933D16F2A63100F1AEF8 /* main.m in Sources */,
+				5E22934416F2A63100F1AEF8 /* AFAppDelegate.m in Sources */,
+				5E22935216F2AA7F00F1AEF8 /* AFStatusItemView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5E22933916F2A63100F1AEF8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E22933A16F2A63100F1AEF8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5E22933F16F2A63100F1AEF8 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E22934016F2A63100F1AEF8 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		5E22934516F2A63100F1AEF8 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E22934616F2A63100F1AEF8 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5E22934816F2A63100F1AEF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		5E22934916F2A63100F1AEF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		5E22934B16F2A63100F1AEF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Doom CPU Monitor/Doom CPU Monitor-Prefix.pch";
+				INFOPLIST_FILE = "Doom CPU Monitor/Doom CPU Monitor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5E22934C16F2A63100F1AEF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Doom CPU Monitor/Doom CPU Monitor-Prefix.pch";
+				INFOPLIST_FILE = "Doom CPU Monitor/Doom CPU Monitor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E22932816F2A63100F1AEF8 /* Build configuration list for PBXProject "Doom CPU Monitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E22934816F2A63100F1AEF8 /* Debug */,
+				5E22934916F2A63100F1AEF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E22934A16F2A63100F1AEF8 /* Build configuration list for PBXNativeTarget "Doom CPU Monitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E22934B16F2A63100F1AEF8 /* Debug */,
+				5E22934C16F2A63100F1AEF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5E22932516F2A63100F1AEF8 /* Project object */;
+}
