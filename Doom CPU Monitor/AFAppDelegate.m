@@ -36,10 +36,10 @@ static const NSUInteger kMaxDangerLevel = 6;
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     
 	[self.statusItem setupView];
-    [self.statusItem setImage:[NSImage imageNamed:@"1"]];
-    [self.statusItem setAlternateImage:[NSImage imageNamed:@"1"]];
     [self.statusItem setHighlightMode:YES];
     [self.statusItem setMenu:self.statusMenu];
+    
+    [self setDangerLevel:1];
     
     self.CPUUsageLock = [[NSLock alloc] init];
     
@@ -111,7 +111,7 @@ static const NSUInteger kMaxDangerLevel = 6;
             CGFloat usage = inUse/total;
             if (highestValue < usage) highestValue = usage;
             
-//            NSLog(@"Core: %u Usage: %f", i, usage);
+            NSLog(@"Core: %u Usage: %f", i, usage);
         }
         [self.CPUUsageLock unlock];
         
@@ -132,7 +132,7 @@ static const NSUInteger kMaxDangerLevel = 6;
     
     [self setDangerLevel:(highestValue * (kMaxDangerLevel - 1)) + 1];
     
-//    NSLog(@"Highest Core Usage: %f", highestValue);
+    NSLog(@"Highest Core Usage: %f", highestValue);
     
 //    int mib[6];
 //    mib[0] = CTL_HW;
