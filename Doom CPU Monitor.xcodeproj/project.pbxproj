@@ -13,6 +13,7 @@
 		5E0C290016F396080093BE5F /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C28FA16F396080093BE5F /* 4.png */; };
 		5E0C290116F396080093BE5F /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C28FB16F396080093BE5F /* 5.png */; };
 		5E0C290216F396080093BE5F /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C28FC16F396080093BE5F /* 6.png */; };
+		5E0C293116F3B0F20093BE5F /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5E0C293016F3B0F20093BE5F /* Icon.icns */; };
 		5E22933116F2A63100F1AEF8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E22933016F2A63100F1AEF8 /* Cocoa.framework */; };
 		5E22933B16F2A63100F1AEF8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E22933916F2A63100F1AEF8 /* InfoPlist.strings */; };
 		5E22933D16F2A63100F1AEF8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E22933C16F2A63100F1AEF8 /* main.m */; };
@@ -30,6 +31,7 @@
 		5E0C28FA16F396080093BE5F /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		5E0C28FB16F396080093BE5F /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
 		5E0C28FC16F396080093BE5F /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
+		5E0C293016F3B0F20093BE5F /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		5E22932D16F2A63100F1AEF8 /* Doom CPU Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Doom CPU Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E22933016F2A63100F1AEF8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5E22933316F2A63100F1AEF8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -75,6 +77,7 @@
 		5E22932416F2A63100F1AEF8 = {
 			isa = PBXGroup;
 			children = (
+				5E0C293016F3B0F20093BE5F /* Icon.icns */,
 				5E22933616F2A63100F1AEF8 /* Doom CPU Monitor */,
 				5E22932F16F2A63100F1AEF8 /* Frameworks */,
 				5E22932E16F2A63100F1AEF8 /* Products */,
@@ -196,6 +199,7 @@
 				5E0C290016F396080093BE5F /* 4.png in Resources */,
 				5E0C290116F396080093BE5F /* 5.png in Resources */,
 				5E0C290216F396080093BE5F /* 6.png in Resources */,
+				5E0C293116F3B0F20093BE5F /* Icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
