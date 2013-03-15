@@ -15,25 +15,31 @@
 #import "AFAppDelegate.h"
 #import "AFStatusItemView.h"
 
+@interface AFAppDelegate ()
+
+@property (strong) NSTimer *updateTimer;
+@property (strong) NSLock *CPUUsageLock;
+
+@property (strong) AFStatusItemView *statusItemView;
+
+@end
+
 @implementation AFAppDelegate
 {
-    processor_info_array_t cpuInfo, prevCpuInfo;
+    processor_info_array_t prevCpuInfo;
+    processor_info_array_t cpuInfo;
     mach_msg_type_number_t numCpuInfo, numPrevCpuInfo;
     unsigned numCPUs;
-    NSTimer *updateTimer;
-    NSLock *CPUUsageLock;
-    
-    AFStatusItemView *statusItemView;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     
-    statusItemView = [[AFStatusItemView alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
+    self.statusItemView = [[AFStatusItemView alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
     
     [self.statusItem setTitle:@" "];
-    [self.statusItem setView:statusItemView];
+    [self.statusItem setView:self.statusItemView];
     [self.statusItem setHighlightMode:YES];
     [self.statusItem setEnabled:YES];
     
@@ -42,6 +48,8 @@
     [self.statusItem setTarget:self];
     [self.statusItem setAction:@selector(openMenu:)];
     
+    self.CPUUsageLock = [[NSLock alloc] init];
+    
     
     int mib[2U] = { CTL_HW, HW_NCPU };
     size_t sizeOfNumCPUs = sizeof(numCPUs);
@@ -49,9 +57,7 @@
     if(status)
         numCPUs = 1;
     
-    CPUUsageLock = [[NSLock alloc] init];
-    
-    updateTimer = [NSTimer scheduledTimerWithTimeInterval:3
+    self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:3
                                                     target:self
                                                   selector:@selector(updateInfo:)
                                                   userInfo:nil
@@ -70,7 +76,7 @@
     natural_t numCPUsU = 0U;
     kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numCPUsU, &cpuInfo, &numCpuInfo);
     if(err == KERN_SUCCESS) {
-        [CPUUsageLock lock];
+        [self.CPUUsageLock lock];
         
         for(unsigned i = 0U; i < numCPUs; ++i) {
             float inUse, total;
@@ -91,7 +97,7 @@
             
             NSLog(@"Core: %u Usage: %f", i, usage);
         }
-        [CPUUsageLock unlock];
+        [self.CPUUsageLock unlock];
         
         if(prevCpuInfo) {
             size_t prevCpuInfoSize = sizeof(integer_t) * numPrevCpuInfo;
@@ -108,7 +114,8 @@
         [NSApp terminate:nil];
     }
     
-    statusItemView.alpha = highestValue;
+    NSLog(@"Highest Core Usage: %f", highestValue);
+    self.statusItemView.alpha = highestValue;
 }
 
 @end
