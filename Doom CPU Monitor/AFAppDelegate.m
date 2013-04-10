@@ -12,13 +12,15 @@
 #include <mach/processor_info.h>
 #include <mach/mach_host.h>
 
+#import <ReactiveCocoa.h>
+#import <EXTScope.h>
+
 #import "AFAppDelegate.h"
 
 #define kDefaultFaceKey @"com.ashFurrow.DefaultFace"
 
 @interface AFAppDelegate ()
 
-@property (strong) NSTimer *updateTimer;
 @property (strong) NSLock *CPUUsageLock;
 
 @property (nonatomic, strong) NSDictionary *faceChoices;
@@ -68,12 +70,63 @@ static const NSUInteger kMaxDangerLevel = 6;
     int status = sysctl(mib, 2U, &numCPUs, &sizeOfNumCPUs, NULL, 0U);
     if(status) numCPUs = 1;
     
-    self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:3
-                                                        target:self
-                                                      selector:@selector(updateInfo:)
-                                                      userInfo:nil
-                                                       repeats:YES];
-    [self updateInfo:nil];
+    @weakify(self);
+    [RACAble(self.dangerLevel) subscribeNext:^(id x) {
+        @strongify(self);
+        NSString *facePath = [[self.faceChoices[self.currentFace] stringByAppendingPathComponent:[@(self.dangerLevel) stringValue]] stringByAppendingPathExtension:@"png"];
+        NSImage *image = [[NSImage alloc] initWithContentsOfFile:facePath];
+        [self.statusItem setImage:image];
+        [self.statusItem setAlternateImage:image];
+    }];
+    
+    [[RACSignal interval:1] subscribeNext:^(id x) {
+        @strongify(self);
+        CGFloat highestValue = -1;
+        natural_t numCPUsU = 0U;
+        kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numCPUsU, &cpuInfo, &numCpuInfo);
+        if(err == KERN_SUCCESS) {
+            [self.CPUUsageLock lock];
+            
+            for(unsigned i = 0U; i < numCPUs; ++i) {
+                float inUse, total;
+                if(prevCpuInfo) {
+                    inUse = (
+                             (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER]   - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER])
+                             + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM])
+                             + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE]   - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE])
+                             );
+                    total = inUse + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
+                } else {
+                    inUse = cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER] + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
+                    total = inUse + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
+                }
+                
+                CGFloat usage = inUse/total;
+                if (highestValue < usage) highestValue = usage;
+                
+                NSLog(@"Core: %u Usage: %f", i, usage);
+            }
+            [self.CPUUsageLock unlock];
+            
+            if(prevCpuInfo) {
+                size_t prevCpuInfoSize = sizeof(integer_t) * numPrevCpuInfo;
+                vm_deallocate(mach_task_self(), (vm_address_t)prevCpuInfo, prevCpuInfoSize);
+            }
+            
+            prevCpuInfo = cpuInfo;
+            numPrevCpuInfo = numCpuInfo;
+            
+            cpuInfo = NULL;
+            numCpuInfo = 0U;
+        } else {
+            NSLog(@"Error!");
+            [NSApp terminate:nil];
+        }
+        
+        [self setDangerLevel:(highestValue * (kMaxDangerLevel - 1)) + 1];
+        
+        NSLog(@"Highest Core Usage: %f", highestValue);
+    }];
 }
 
 #pragma mark - Private Methods
@@ -131,18 +184,6 @@ static const NSUInteger kMaxDangerLevel = 6;
 	}
 }
 
-#pragma mark - Overridden Properties
-
--(void)setDangerLevel:(NSUInteger)dangerLevel
-{
-    _dangerLevel = dangerLevel;
-    
-	NSString *facePath = [[self.faceChoices[self.currentFace] stringByAppendingPathComponent:[@(dangerLevel) stringValue]] stringByAppendingPathExtension:@"png"];
-    NSImage *image = [[NSImage alloc] initWithContentsOfFile:facePath];
-    [self.statusItem setImage:image];
-    [self.statusItem setAlternateImage:image];
-}
-
 #pragma mark - NSMenuDelegate methods
 - (void)selectItem:(NSMenuItem *)item
 {
@@ -152,95 +193,6 @@ static const NSUInteger kMaxDangerLevel = 6;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setValue:self.currentFace forKey:kDefaultFaceKey];
 	[defaults synchronize];
-}
-
-- (void)menuWillOpen:(NSMenu *)menu
-{
-    NSLog(@"Will Open");
-}
-
-- (void)menuDidClose:(NSMenu *)menu
-{
-    NSLog(@"Did Close");
-}
-
-#pragma mark - NSTimer methods
-
-// Credit for this solution goes to http://stackoverflow.com/questions/6785069/get-cpu-percent-usage and
-// http://stackoverflow.com/questions/6094444/how-can-i-programmatically-check-free-system-memory-on-mac-like-the-activity-mon
-- (void)updateInfo:(NSTimer *)timer
-{
-    CGFloat highestValue = -1;
-    natural_t numCPUsU = 0U;
-    kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numCPUsU, &cpuInfo, &numCpuInfo);
-    if(err == KERN_SUCCESS) {
-        [self.CPUUsageLock lock];
-        
-        for(unsigned i = 0U; i < numCPUs; ++i) {
-            float inUse, total;
-            if(prevCpuInfo) {
-                inUse = (
-                         (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER]   - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER])
-                         + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM])
-                         + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE]   - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE])
-                         );
-                total = inUse + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
-            } else {
-                inUse = cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER] + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
-                total = inUse + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
-            }
-            
-            CGFloat usage = inUse/total;
-            if (highestValue < usage) highestValue = usage;
-            
-            NSLog(@"Core: %u Usage: %f", i, usage);
-        }
-        [self.CPUUsageLock unlock];
-        
-        if(prevCpuInfo) {
-            size_t prevCpuInfoSize = sizeof(integer_t) * numPrevCpuInfo;
-            vm_deallocate(mach_task_self(), (vm_address_t)prevCpuInfo, prevCpuInfoSize);
-        }
-        
-        prevCpuInfo = cpuInfo;
-        numPrevCpuInfo = numCpuInfo;
-        
-        cpuInfo = NULL;
-        numCpuInfo = 0U;
-    } else {
-        NSLog(@"Error!");
-        [NSApp terminate:nil];
-    }
-    
-    [self setDangerLevel:(highestValue * (kMaxDangerLevel - 1)) + 1];
-    
-    NSLog(@"Highest Core Usage: %f", highestValue);
-    
-//    int mib[6];
-//    mib[0] = CTL_HW;
-//    mib[1] = HW_PAGESIZE;
-//    
-//    int pagesize;
-//    size_t length;
-//    length = sizeof (pagesize);
-//    if (sysctl (mib, 2, &pagesize, &length, NULL, 0) < 0)
-//    {
-//        NSLog (@"Error getting page size.");
-//    }
-//    
-//    mach_msg_type_number_t count = HOST_VM_INFO_COUNT;
-//    
-//    vm_statistics_data_t vmstat;
-//    if (host_statistics (mach_host_self (), HOST_VM_INFO, (host_info_t) &vmstat, &count) != KERN_SUCCESS)
-//    {
-//        NSLog (@"Failed to get VM statistics.");
-//    }
-//    
-//    double total = vmstat.wire_count + vmstat.active_count + vmstat.inactive_count + vmstat.free_count;
-//    double wired = vmstat.wire_count / total;
-//    double active = vmstat.active_count / total;
-//    double inactive = vmstat.inactive_count / total;
-//    double free = vmstat.free_count / total;
 }
 
 @end
